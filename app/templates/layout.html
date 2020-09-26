@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/cover.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.css') }}">
 
     <!-- Google Fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Courgette&family=New+Rocker&display=swap" rel="stylesheet">
@@ -17,40 +17,45 @@
     {% if title %}
     <title>{{title}}</title>
     {%else%}
-    <title>Memoirsens</title>
+    <title>Quotes</title>
     {% endif %}
     
   </head>
 <body>
-  <!-- Top Bar-->
-  <div class="top-bar">
+ <!--Navigation bar-->
+ <div class="site-navbar-wrap js-site-navbar bg-white">
+      
     <div class="container">
-      <div class="col-12 text-right">
-        <p>Be yourself always...</p>
+      <div class="site-navbar bg-light">
+        <div class="row align-items-center">
+          <div class="col-2">
+            <h2 class="mb-0 site-logo"><a href="#" class="font-weight-bold text-uppercase">TechNess</a></h2>
+          </div>
+          <div class="col-10">
+            <nav class="site-navigation text-right" role="navigation">
+              <div class="container">
+                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+
+                <ul class="site-menu js-clone-nav d-none d-lg-block">
+                  <li class="active"><a href="{{url_for('main.home')}}">Home</a></li>
+                  {%if current_user.is_authenticated %}
+                  <li><a href="{{url_for('main.about')}}">Quotes</a></li>
+                  <li><a href="{{url_for('quotes.quotes')}}">Create Quote</a></li>
+                  <li><a href="{{url_for('users.account')}}">Account</a></li>
+                  <li><a href="{{url_for('users.logout')}}">Logout</a></li>
+                  {% else %}
+                  <li><a href="{{url_for('users.register')}}">Register</a></li>
+                  <li><a href="{{url_for('users.login')}}">Login</a></li>
+                  {% endif %}
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
       </div>
     </div>
   </div>
- <!--Navigation bar-->
- <nav class="navbar navbar-expand-lg navbar-light bg-light col-12">
-  <a class="navbar-brand" href="">Memoirs Gram</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-link" href="{{url_for('main.home')}}">Home <span class="sr-only">(current)</span></a>
-      {%if current_user.is_authenticated %}
-      <a class="nav-link" href="{{url_for('main.about')}}">About</a>
-      <a class="nav-link" href="{{url_for('posts.new_post')}}">New Post</a>
-      <a class="nav-link" href="{{url_for('users.account')}}">Account</a>
-      <a class="nav-link" href="{{url_for('users.logout')}}">Logout</a>
-      {% else %}
-      <a class="nav-link" href="{{url_for('users.register')}}">Register</a>
-      <a class="nav-link" href="{{url_for('users.login')}}">Login</a>
-      {% endif %}
-    </div>
-  </div>
-</nav>
+ 
 {% block content %}{% endblock content %}
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

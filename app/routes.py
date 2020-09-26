@@ -1,6 +1,12 @@
 from app import app
 
 @app.route('/')
-@app.route('/index')
+@app.route('/home')
 def index():
-    return "Hello, World!"
+    return render_template('home.html', title='TechNess')
+
+
+@app.route('/')
+@app.route('/about')
+def about():
+    return render_template('about.html', title='TechNess')
