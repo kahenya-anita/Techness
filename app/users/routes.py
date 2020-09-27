@@ -71,7 +71,7 @@ def user_quotes(username):
     user = User.query.filter_by(username=username).first_or_404()
     Quotes = Quote.query.filter_by(author=user)\
         .order_by(Quote.date_posted.desc())\
-        .paginate(page=page, per_page=5)
+        .paginate(page=page, per_page=6)
     return render_template('quotes.html', quotes=quotes, user=user)
 
 
