@@ -1,5 +1,6 @@
 import os
 import secrets
+import requests
 from PIL import Image
 from flask import url_for, current_app
 from flask_mail import Message
@@ -30,3 +31,12 @@ def send_reset_email(user):
 If you did not make this request then simply ignore this email and no changes will be made.
 '''
     mail.send(msg)
+
+def subscribe_user(email, use_group_email, api_key):
+    resp = requests.post(f"https://api.mailgun.net/v3/lists/{user_group_email}/members",
+                         auth=("api", api_key),
+                         data={"subscribed": True,
+                               "email": email}
+                        )
+
+    return resp
