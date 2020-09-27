@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint
-from app.models import Post
+from app.models import Quote
 
 main = Blueprint('main', __name__)
 
@@ -13,5 +13,5 @@ def home():
 @main.route("/about")
 def about():
     page = request.args.get('page', 1, type=int)
-    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=6)
-    return render_template('about.html', posts=posts)
+    quotes = quote.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=6)
+    return render_template('about.html', quotes=quotes)
