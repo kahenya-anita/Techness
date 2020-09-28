@@ -5,8 +5,12 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from app.config import Config, config_options
+from app import app
+import urllib.request,json
+from .models import quote
 
 
+Quote = quote.Quote
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
@@ -23,6 +27,8 @@ def create_app(config_name):
     db.init_app(app)
     app.config.from_object(config_options[config_name]) 
     app.config['SECRET_KEY'] = '0806436c2c6ce7'
+    app.api_key = api key['QUOTES_API_KEY']
+
     
     # configure UploadSet
     configure_uploads(app,photos)
