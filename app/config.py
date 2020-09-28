@@ -6,7 +6,7 @@ class Config:
     SECRET_KEY =  os.urandom(32)
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = 'postgres+psycopg2://scgyqlylggnxkt:35e51f5b6aa14afe9bdc51402c729bd461206862a039d4a9d7b6aee2e7ccb4fb@ec2-34-234-185-150.compute-1.amazonaws.com:5432/dfneilmdasjmin'
-   QUOTES_API_BASE_URL = 'GET http://quotes.stormconsultancy.co.uk/quotes.json'
+    QUOTE_API_BASE_URL = 'GET http://quotes.stormconsultancy.co.uk/quotes.json'
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
