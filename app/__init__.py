@@ -27,8 +27,9 @@ def create_app(config_name):
     db.init_app(app)
     app.config.from_object(config_options[config_name]) 
     app.config['SECRET_KEY'] = '0806436c2c6ce7'
-    app.api_key = api key['QUOTES_API_KEY']
-
+    app.api_key = api key['QUOTE_API_KEY']
+ 
+    base_url = app.config["QUOTE_API_BASE_URL"]
     
     # configure UploadSet
     configure_uploads(app,photos)
@@ -36,3 +37,22 @@ def create_app(config_name):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
+
+def get_quotes(category):
+    '''
+    Function that gets the json response to our url request
+    '''
+    get_quotes_url = base_url.format(category,api_key)
+
+    with urllib.request.urlopen(get_quotes_url) as url:
+        get_quotes_data = url.read()
+        get_quotes_response = json.loads(get_quotes_data)
+
+        quote_results = None
+
+        if get_quotes_response['results']:
+            quote_results_list = get_quotes_response['results']
+            quote_results = process_results(quote_results_list)
+
+
+    return quote_results

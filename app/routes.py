@@ -2,7 +2,7 @@ from app import app
 
 
 #Getting api key
-api_key = api key['QUOTES_API_KEY']
+api_key = api key['QUOTE_API_KEY']
 
 @app.route('/')
 @app.route('/home')
